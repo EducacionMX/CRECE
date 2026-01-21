@@ -1,0 +1,15 @@
+backend:
+  name: git-gateway
+  branch: main # Cambia "main" si estás usando otra rama
+
+media_folder: static/img # Carpeta donde se guardan las imágenes
+public_folder: /img # Ruta pública para acceder a las imágenes
+
+collections:
+  - name: "pages"
+    label: "Pages"
+    folder: "" # Carpeta donde están las páginas (raíz del repositorio)
+    create: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Body", name: "body", widget: "markdown" }
