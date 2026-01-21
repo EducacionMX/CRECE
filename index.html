@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buscador de Constancias - CRECE</title>
+  <style>
+    /* General */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    header {
+      background-color: #0056b3;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    header img {
+      height: 80px;
+      margin-bottom: 10px;
+    }
+
+    header .title {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    header .links {
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    header .links a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+    }
+
+    main {
+      text-align: center;
+      padding: 20px;
+    }
+
+    main h1 {
+      color: #0056b3;
+    }
+
+    input {
+      padding: 10px;
+      width: 300px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    table {
+      margin: 20px auto;
+      border-collapse: collapse;
+      width: 80%;
+      background-color: white;
+      border: 1px solid #ddd;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #0056b3;
+      color: white;
+    }
+
+    footer {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 14px;
+      padding: 20px 0;
+      background-color: #0056b3;
+      color: white;
+    }
+
+    footer p {
+      margin: 5px 0;
+    }
+
+    footer a {
+      color: white;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="title">CRECE</div>
+    <div class="links">
+      <a href="https://www.facebook.com/ece.edu.mx/" target="_blank">Facebook</a>
+    </div>
+  </header>
+  <main>
+    <h1>Buscador de Constancias</h1>
+    <p>Ingresa tu CURP para buscar constancias emitidas por el CRECE</p>
+    <input type="text" id="curp" placeholder="Ingresa tu CURP">
+    <button onclick="buscarConstancias()">Buscar</button>
+    <table id="resultados" style="display:none;">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Curso o Diplomado</th>
+          <th>Folio</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </main>
+  <footer>
+    <p>Gracias por formar parte de la Oferta Educativa en Línea del CRECE.</p>
+    <p>No olviden estar al pendiente de nuestras redes sociales para futuros cursos y diplomados.</p>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
