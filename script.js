@@ -25,10 +25,10 @@ async function buscarConstancias() {
 
   // Índices de columnas (0-based)
   const COL = {
-    FOLIO: 1,   // B
-    NOMBRE: 5,  // F
-    CURSO: 9,   // J
-    URL: 13     // N
+  FOLIO: 1,
+  NOMBRE: 5,
+  CURSO: 9,
+  URL: 13
   };
 
   const table = document.getElementById("resultados");
