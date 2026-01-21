@@ -48,34 +48,30 @@ async function buscarConstancias() {
     }
 
     rows.forEach(row => {
-      if (!row.c) return;
+  if (!row.c) return;
 
-      const c = row.c;
-      const folio = c[COL.FOLIO]?.v ?? "N/D";
-      const nombre = c[COL.NOMBRE]?.v ?? "N/D";
-      const curso = c[COL.CURSO]?.v ?? "N/D";
-      const urlConstancia = c[COL.URL]?.v ?? null;
+  const c = row.c;
+  const folio = c[COL.FOLIO]?.v ?? "N/D";
+  const nombre = c[COL.NOMBRE]?.v ?? "N/D";
+  const curso = c[COL.CURSO]?.v ?? "N/D";
+  const urlConstancia = c[COL.URL]?.v ?? null;
 
-      const tr = document.createElement("tr");
+  const tr = document.createElement("tr");
 
-let constanciaHTML = "En proceso de emisión";
+  let constanciaHTML = "En proceso de emisión";
+  if (urlConstancia && urlConstancia.toString().trim() !== "") {
+    constanciaHTML = `<a href="${urlConstancia}" target="_blank" rel="noopener">Ver constancia</a>`;
+  }
 
-if (urlConstancia && urlConstancia.toString().trim() !== "") {
-  constanciaHTML = `<a href="${urlConstancia}" target="_blank" rel="noopener">Ver constancia</a>`;
-}
+  tr.innerHTML = `
+    <td>${folio}</td>
+    <td>${nombre}</td>
+    <td>${curso}</td>
+    <td>${constanciaHTML}</td>
+  `;
 
-tr.innerHTML = `
-  <td>${folio}</td>
-  <td>${nombre}</td>
-  <td>${curso}</td>
-  <td>${constanciaHTML}</td>
-`;
-
-        tr.appendChild(td);
-      }
-
-      tbody.appendChild(tr);
-    });
+  tbody.appendChild(tr);
+});
 
     table.style.display = "table";
 
