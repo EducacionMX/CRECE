@@ -57,15 +57,20 @@ async function buscarConstancias() {
       const urlConstancia = c[COL.URL]?.v ?? null;
 
       const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <td>${nombre}</td>
-        <td>${curso}</td>
-        <td>${folio}</td>
-      `;
 
-      if (urlConstancia) {
-        const td = document.createElement("td");
-        td.innerHTML = `<a href="${urlConstancia}" target="_blank" rel="noopener">Ver constancia</a>`;
+let constanciaHTML = "En proceso de emisión";
+
+if (urlConstancia && urlConstancia.toString().trim() !== "") {
+  constanciaHTML = `<a href="${urlConstancia}" target="_blank" rel="noopener">Ver constancia</a>`;
+}
+
+tr.innerHTML = `
+  <td>${folio}</td>
+  <td>${nombre}</td>
+  <td>${curso}</td>
+  <td>${constanciaHTML}</td>
+`;
+
         tr.appendChild(td);
       }
 
