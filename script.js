@@ -170,7 +170,7 @@
     const spinner = element('span', 'spin');
     spinner.setAttribute('aria-hidden', 'true');
     button.replaceChildren(spinner, document.createTextNode('Buscando…'));
-    out.replaceChildren(element('p', 'status', 'Buscando constancias…'));
+    out.replaceChildren(element('p', 'status', 'Buscando constancias… puede tardar unos segundos.'));
     let heading = null;
     let timer;
     try {
@@ -178,8 +178,8 @@
         timer = setTimeout(function () {
           request.timedOut = true;
           request.controller.abort();
-          reject(new Error('La consulta superó el límite de 15 segundos.'));
-        }, 15000);
+          reject(new Error('La consulta superó el límite de 30 segundos.'));
+        }, 30000);
       });
       const rows = await Promise.race([fetchResults(curp, request.controller.signal), timeout]);
       if (activeRequest !== request) return;
