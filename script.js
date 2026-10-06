@@ -2,7 +2,7 @@
   'use strict';
 
   const CONFIG = {
-    APPS_SCRIPT_URL: '',
+    APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbwy0Ha0qbJjRBAHSyXrnrpZjsqLj2s__M5s44EfCY7yusrHkNuBx6GLqH506X3GABN4/exec',
     SHEET_ID: '1ToHqHBcKRMVL7t6Ud2gdiqC9PX6OVDKGnp7fLoE5pjw'
   };
   const form = document.getElementById('f');
