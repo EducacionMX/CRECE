@@ -2,8 +2,7 @@
   'use strict';
 
   const CONFIG = {
-    APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbwy0Ha0qbJjRBAHSyXrnrpZjsqLj2s__M5s44EfCY7yusrHkNuBx6GLqH506X3GABN4/exec',
-    SHEET_ID: '1ToHqHBcKRMVL7t6Ud2gdiqC9PX6OVDKGnp7fLoE5pjw'
+    APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbwy0Ha0qbJjRBAHSyXrnrpZjsqLj2s__M5s44EfCY7yusrHkNuBx6GLqH506X3GABN4/exec'
   };
   const form = document.getElementById('f');
   const input = document.getElementById('curp');
@@ -39,35 +38,15 @@
   }
 
   async function fetchResults(curp, signal) {
-    const query = "select B,F,J,N where I contains '" + curp + "'";
-    const url = CONFIG.APPS_SCRIPT_URL
-      ? CONFIG.APPS_SCRIPT_URL + '?curp=' + encodeURIComponent(curp)
-      : 'https://docs.google.com/spreadsheets/d/' + CONFIG.SHEET_ID +
-        '/gviz/tq?tqx=out:json&tq=' + encodeURIComponent(query);
+    if (!CONFIG.APPS_SCRIPT_URL) throw new Error('Falta configurar APPS_SCRIPT_URL');
+    const url = CONFIG.APPS_SCRIPT_URL + '?curp=' + encodeURIComponent(curp);
     const response = await fetch(url, { method: 'GET', signal: signal });
     if (!response.ok) throw new Error('Error HTTP ' + response.status);
-    if (CONFIG.APPS_SCRIPT_URL) {
-      const json = await response.json();
-      if (!json || json.ok !== true) {
-        throw new Error(json && json.error ? String(json.error) : 'Respuesta inválida.');
-      }
-      return normalize(json.resultados);
+    const json = await response.json();
+    if (!json || json.ok !== true) {
+      throw new Error(json && json.error ? String(json.error) : 'Respuesta inválida.');
     }
-    const text = (await response.text()).trim();
-    const start = text.indexOf('(');
-    if (start < 0 || !text.endsWith(');')) throw new Error('Respuesta inválida.');
-    const json = JSON.parse(text.slice(start + 1, -2));
-    if (!json || json.status !== 'ok' || !json.table || !Array.isArray(json.table.rows)) {
-      throw new Error('Respuesta de Google Visualization inválida.');
-    }
-    return normalize(json.table.rows.map(function (row) {
-      if (!row || !Array.isArray(row.c)) throw new Error('Fila inválida.');
-      const cells = row.c;
-      return {
-        folio: cells[0] && cells[0].v, nombre: cells[1] && cells[1].v,
-        curso: cells[2] && cells[2].v, url: cells[3] && cells[3].v
-      };
-    }));
+    return normalize(json.resultados);
   }
 
   function safeUrl(raw) {
